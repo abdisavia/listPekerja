@@ -1,0 +1,38 @@
+*{
+    margin : 0;
+    padding : 0;
+}
+
+.container{
+    margin : 10px 100px;
+    text-align : center;
+    align-items:center;
+}
+
+h1{
+    text-align : center;
+}
+
+
+.inputs{
+    margin: 20px 0;
+    display : inline-block;
+}
+
+label{
+    display : block;
+    text-align : left;
+}
+
+#btnSubmit{
+    display : block;
+    margin-top : 5px;
+}
+
+table{
+    margin : 20px auto;
+}
+
+table td{
+    padding : 0 15px;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>List Pekerja</title>
+</head>
+<body>
+    <div class="container">
+        <h1>List Pekerja</h1>
+            <div class="inputs">
+                <label for="inputName">Nama : </label>
+                <input type="text" name="nama" id="inputName">
+                <br>
+                <label for="inputGaji">Gaji : </label>
+                <input type="text" name="gaji" id="inputGaji">
+                <br>
+                <button type="button" id="btnSubmit">Submit</button>
+            </div>
+            <table id="output">
+                <thead>
+                    <th>Nama</th>
+                    <th>Gaji</th>
+                    <th>Aksi</th>
+                </thead>
+                <tbody id="body">
+                    <script id="template" type="text/template">
+                        {{#pekerja}}
+                            <tr>
+                                <td>{{Nama}}</td>
+                                <td>{{Gaji}}</td>
+                                <td><button type="button" class=".delete">Delete</button></td>
+                            </tr>
+                        {{/pekerja}}
+                    </script>
+                </tbody>
+            </table>
+    </div>
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="inputdata.js"></script>
+</body>
+</html>
