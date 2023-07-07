@@ -1,6 +1,6 @@
 (function(){
     var pekerja = {
-        Pekerja :[],
+        Pekerja :[{"Nama" : "abdi", "Gaji" : "20000000"}],
         init : function(){
             this.tempDOM()
             this.aksi()
@@ -13,7 +13,8 @@
             this.template = document.querySelector("#template")
             this.table = document.querySelector("#output")
             this.tbody = this.table.querySelector("#body")
-            this.btnDelete = this.tbody.querySelectorAll(".delete")
+            this.tr = this.tbody.querySelectorAll("tr")
+            this.btnDelete = document.querySelectorAll(".delete")
         },
         pushKePekerja : function(){
             let obj = {}
@@ -22,17 +23,19 @@
             this.Pekerja.push(obj)
             this.tampilkan()
         },
-        deletePekerja : function(){
-            console.log("button delete clicked : " + this.btnDelete)
+        deletePekerja : function(e,parent){
+            var i = e.target.closest("tr")
+            parent.removeChild(i)
+            this.Pekerja.splice(0,1)
+            this.tampilkan()
         },
         aksi : function(){
             this.btnSubmit.addEventListener('click', this.pushKePekerja.bind(this))
-            if(this.Pekerja.length != 0){
-                console.log(this.btnDelete)
-                this.btnDelete.foreach((e) => {
-                    e.addEventListener('click', this.deletePekerja.bind(this))
-                })
-            }
+            this.tbody.addEventListener('click', function(e) {
+                if(e.target.nodeName = "BUTTON"){
+                    this.deletePekerja(e,this.tbody)
+                }
+            }.bind(this))
         },
         tampilkan : function(){
             if(this.Pekerja.length != 0){
@@ -42,6 +45,8 @@
                     Gaji : this.Pekerja["Gaji"]
                 }
                 this.tbody.innerHTML = Mustache.render(this.template.innerHTML, data)
+                this.inputNama.value = ""
+                this.inputGaji.value = ""
             }
         },
     }
