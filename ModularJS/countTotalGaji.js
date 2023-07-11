@@ -3,45 +3,47 @@ let countGaji = (function(){
     let p = document.querySelector("#outputTotalGaji")
 
     let Gaji = []
-    let totalGaji
-    
+    let totalGaji = 0
+    events.on("setPekerja",setPekerja)
+    events.on("addGaji", addGaji)
+    events.on("deleteGaji", deleteGaji)
+    events.on("tampilkanGaji", tampilkan)  
+
     function setPekerja(gaji){
-        Gaji = gaji 
-        totalGaji = 0
+        console.log(gaji)
+        if(gaji == []){
+            Gaji = [] 
+        }else{
+            gaji = gaji.map(x=>x.Gaji)
+            Gaji = gaji
+            countGajiP()
+        }
     }
 
     function countGajiP(){
         Gaji.forEach((i) => {
-            console.log(i)
+            console.log(typeof i)
             totalGaji += i
         })
-        _tampilkan()
     }
 
     function addGaji(gaji){
         Gaji.push(gaji)
         totalGaji += gaji
-        _tampilkan()
     }
 
     function deleteGaji(index){
         totalGaji -= Gaji[index]
         Gaji.splice(index,1)
-        _tampilkan()
     }
 
-    function _tampilkan(){
+    function tampilkan(){
+        console.log(Gaji)
         var data = {
             totalGaji : totalGaji
         }
-        console.log("executed")
+        console.log(totalGaji)
         render = Mustache.render(template.innerHTML, data);
         p.innerHTML = render
-    }
-    return {
-        setPekerja : setPekerja,
-        countGaji : countGajiP,
-        addGaji : addGaji,
-        deleteGaji : deleteGaji
     }
 })()

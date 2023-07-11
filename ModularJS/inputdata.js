@@ -1,15 +1,12 @@
-var pekerja = (function(){
-        let Pekerja = [{Nama : "abdi", Gaji : 1}]
+let pekerja = (function(){
+        let Pekerja = [{Nama : "abdi", Gaji : 1},{Nama : "abdi", Gaji : 1}]
         let inputGaji = document.querySelector("#inputGaji")
         let inputNama = document.querySelector("#inputName")
         let btnSubmit = document.querySelector("#btnSubmit")
         let template = document.querySelector("#template")
         let table = document.querySelector("#output")
         let tbody = table.querySelector("#body")
-        let gaji = Pekerja.map(p => p.Gaji);
-        countGaji.setPekerja(gaji)
-        countGaji.countGaji()
-
+        events.emit("setPekerja",Pekerja)
         btnSubmit.addEventListener('click', pushKePekerja)
         //delegate multiple button
         tbody.addEventListener('click', function(e) {
@@ -27,7 +24,7 @@ var pekerja = (function(){
             obj.Nama = Nam
             obj.Gaji = Gaj 
             Pekerja.push(obj)
-            countGaji.addGaji(obj.Gaji)
+            events.emit("addGaji",obj.Gaji)
             _tampilkan()
         }else{
             alert("Masukkan Data dengan benar!")
@@ -50,14 +47,13 @@ var pekerja = (function(){
             tbody.removeChild(i)
             i = index;
         }
-        countGaji.deleteGaji(i);
+        events.emit("deleteGaji",i)
         Pekerja.splice(i,1)
         _tampilkan()
     }
     
     function _tampilkan(){
         if(Pekerja.length != 0){
-            console.log(Pekerja.map(x=>x.Nama))
             var data = {
                 pekerja : Pekerja,
                 Nama : Pekerja.Nama,
@@ -67,6 +63,7 @@ var pekerja = (function(){
             inputNama.value = ""
             inputGaji.value = ""
         }
+        events.emit("tampilkanGaji")
     }
     return {
         tambahPekerja : pushKePekerja,
